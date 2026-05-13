@@ -1,0 +1,10 @@
+﻿namespace rmorenoS5
+{
+	public partial class AppShell : Shell
+	{
+		public AppShell()
+		{
+			InitializeComponent();
+		}
+	}
+}

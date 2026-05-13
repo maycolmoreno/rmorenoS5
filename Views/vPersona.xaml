@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="rmorenoS5.Views.vPersona"
+             Title="CRUD EN SQLITE: Persona"
+             BackgroundColor="#1a1a2e">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="15">
+
+            <Label Text="CRUD EN SQLITE: Persona"
+                   FontSize="22"
+                   FontAttributes="Bold"
+                   TextColor="#a78bfa"
+                   HorizontalOptions="Center" />
+
+            <Entry x:Name="NombreEntry"
+                   Placeholder="Nombre de la persona"
+                   BackgroundColor="#2d2d44"
+                   TextColor="White"
+                   PlaceholderColor="#aaaaaa" />
+
+            <Button Text="Agregar persona"
+                    Clicked="OnAgregarClicked"
+                    BackgroundColor="#7c3aed"
+                    TextColor="White"
+                    HorizontalOptions="Fill" />
+
+            <Button Text="Listar personas"
+                    Clicked="OnListarClicked"
+                    BackgroundColor="#7c3aed"
+                    TextColor="White"
+                    HorizontalOptions="Fill" />
+
+            <CollectionView x:Name="PersonasCollection">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid ColumnDefinitions="40,*,Auto" Padding="5">
+                            <Label Grid.Column="0"
+                                   Text="{Binding Id}"
+                                   TextColor="White"
+                                   VerticalOptions="Center" />
+                            <Label Grid.Column="1"
+                                   Text="{Binding Nombre}"
+                                   TextColor="White"
+                                   VerticalOptions="Center" />
+                            <Button Grid.Column="2"
+                                    Text="Eliminar"
+                                    BackgroundColor="#dc2626"
+                                    TextColor="White"
+                                    CommandParameter="{Binding .}"
+                                    Clicked="OnEliminarClicked" />
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>
