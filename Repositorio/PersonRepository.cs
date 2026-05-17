@@ -60,5 +60,19 @@ namespace rmorenoS5.Repositorio
                 StatusMessage = string.Format("ERROR al eliminar. Mensaje: {0}", ex.Message);
             }
         }
+
+        public void EditarPersona(Persona persona)
+        {
+            try
+            {
+                Init();
+                _conn.Update(persona);
+                StatusMessage = string.Format("Persona actualizada [Id: {0}, Nombre: {1}]", persona.Id, persona.Nombre);
+            }
+            catch (Exception ex)
+            {
+                StatusMessage = string.Format("ERROR al editar. Mensaje: {0}", ex.Message);
+            }
+        }
     }
 }

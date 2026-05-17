@@ -6,6 +6,7 @@ namespace rmorenoS5.Views
     public partial class vPersona : ContentPage
     {
         private readonly PersonRepository _repo;
+        private int _idEditando = -1;
 
         public vPersona()
         {
@@ -13,17 +14,43 @@ namespace rmorenoS5.Views
             _repo = new PersonRepository();
         }
 
-        private void OnAgregarClicked(object? sender, EventArgs e)
+        private async void OnAgregarClicked(object? sender, EventArgs e)
         {
             string nombre = NombreEntry.Text?.Trim() ?? string.Empty;
             if (string.IsNullOrEmpty(nombre))
             {
-                DisplayAlert("Error", "Ingresa un nombre.", "OK");
+                await DisplayAlertAsync("Error", "Ingresa un nombre.", "OK");
                 return;
             }
 
             _repo.AgregarPersona(new Persona { Nombre = nombre });
             NombreEntry.Text = string.Empty;
+            CargarPersonas();
+        }
+
+        private void OnEditarClicked(object? sender, EventArgs e)
+        {
+            if (sender is Button btn && btn.CommandParameter is Persona persona)
+            {
+                _idEditando = persona.Id;
+                NombreEntry.Text = persona.Nombre;
+                BtnActualizar.IsVisible = true;
+            }
+        }
+
+        private async void OnActualizarClicked(object? sender, EventArgs e)
+        {
+            string nombre = NombreEntry.Text?.Trim() ?? string.Empty;
+            if (string.IsNullOrEmpty(nombre))
+            {
+                await DisplayAlertAsync("Error", "Ingresa un nombre.", "OK");
+                return;
+            }
+
+            _repo.EditarPersona(new Persona { Id = _idEditando, Nombre = nombre });
+            NombreEntry.Text = string.Empty;
+            BtnActualizar.IsVisible = false;
+            _idEditando = -1;
             CargarPersonas();
         }
 

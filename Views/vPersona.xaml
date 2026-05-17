@@ -26,6 +26,14 @@
                     TextColor="White"
                     HorizontalOptions="Fill" />
 
+            <Button x:Name="BtnActualizar"
+                    Text="Actualizar persona"
+                    Clicked="OnActualizarClicked"
+                    BackgroundColor="#059669"
+                    TextColor="White"
+                    HorizontalOptions="Fill"
+                    IsVisible="False" />
+
             <Button Text="Listar personas"
                     Clicked="OnListarClicked"
                     BackgroundColor="#7c3aed"
@@ -35,7 +43,7 @@
             <CollectionView x:Name="PersonasCollection">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <Grid ColumnDefinitions="40,*,Auto" Padding="5">
+                        <Grid ColumnDefinitions="40,*,Auto,Auto" Padding="5">
                             <Label Grid.Column="0"
                                    Text="{Binding Id}"
                                    TextColor="White"
@@ -45,6 +53,12 @@
                                    TextColor="White"
                                    VerticalOptions="Center" />
                             <Button Grid.Column="2"
+                                    Text="Editar"
+                                    BackgroundColor="#d97706"
+                                    TextColor="White"
+                                    CommandParameter="{Binding .}"
+                                    Clicked="OnEditarClicked" />
+                            <Button Grid.Column="3"
                                     Text="Eliminar"
                                     BackgroundColor="#dc2626"
                                     TextColor="White"
